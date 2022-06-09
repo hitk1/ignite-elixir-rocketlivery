@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :rocketlivery, Rocketlivery.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "rpi1234",
   database: "rocketlivery_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
