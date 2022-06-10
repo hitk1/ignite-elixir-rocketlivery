@@ -8,9 +8,13 @@ defmodule Rocketlivery.User do
   @primary_key {:id, :binary_id, autogenerate: true}
   @required_fields [:address, :age, :cep, :cpf, :email, :password, :name]
 
+  # Este [derive] faz uma chamada "automatica" pras views pra toda vez que for necessario renderizar um usuario
+  # assim nao temos a necessidade de mapear quais campos queremos mostrar em cada view, respectivo a este modulo
+  @derive {Jason.Encoder, only: [:id, :age, :cpf, :address, :email]}
+
   schema "users" do
     field :address, :string
-    field :age, :field
+    field :age, :integer
     field :cep, :string
     field :cpf, :string
     field :email, :string

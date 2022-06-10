@@ -9,6 +9,13 @@ defmodule RocketliveryWeb.Router do
     pipe_through :api
 
     get "/", WelcomeController, :index
+
+    # Quando há a necessidade de implemetar um crud de um dominio de entidade, no caso usuario
+    # basta utilizar o metodo [resources] que ele cria todos os endpoints com os respectivos metodos
+    # automaticamente
+
+    # neste caso [new, edit] são endpoint adicionais, fora os comuns
+    resources "/users", UsersController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development
