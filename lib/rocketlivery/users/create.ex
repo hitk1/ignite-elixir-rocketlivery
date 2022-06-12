@@ -1,5 +1,5 @@
 defmodule Rocketlivery.Users.Create do
-  alias Rocketlivery.{User, Repo}
+  alias Rocketlivery.{User, Repo, Error}
 
   def call(params) do
     params
@@ -8,9 +8,9 @@ defmodule Rocketlivery.Users.Create do
     |> handle_insert()
   end
 
-  defp handle_insert({:ok, %User{} = user}), do: {:ok, user}
+  defp handle_insert({:ok, %User{}} = result), do: result
 
   defp handle_insert({:error, reason}) do
-    {:error, %{status: :bad_request, reason: reason}}
+    {:error, Error.build(:bad_request, reason)}
   end
 end
