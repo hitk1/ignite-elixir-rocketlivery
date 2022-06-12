@@ -21,4 +21,12 @@ defmodule RocketliveryWeb.UsersController do
       |> render("show.json", user: user)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    with {:ok, %User{}} <- Rocketlivery.delete_user(id) do
+      conn
+      |> put_status(:ok)
+      |> json(%{message: "User deleted successfully!"})
+    end
+  end
 end
