@@ -25,12 +25,22 @@ defmodule Rocketlivery.User do
     timestamps()
   end
 
-  # Adiciona um struct com valor default para aproveitar a lógica para criação e atualização
-  def changeset(struct \\ %__MODULE__{}, params) do
-    struct
+  def changeset(params) do
+    %__MODULE__{}
     |> cast(params, @required_fields)
     |> validate_required(@required_fields)
-    # |> validate_length(:password_hash, min: 6)
+    |> changes(params)
+  end
+
+  # Adiciona um struct com valor default para aproveitar a lógica para criação e atualização
+  def changeset(struct, params) do
+    struct
+    |> cast(params, @required_fields)
+    |> changes(params)
+  end
+
+  defp changes(struct, params) do
+    struct
     |> validate_length(:cep, is: 8)
     |> validate_length(:cpf, is: 11)
     |> validate_number(:age, greater_than_or_equal_to: 18)

@@ -29,4 +29,12 @@ defmodule RocketliveryWeb.UsersController do
       |> json(%{message: "User deleted successfully!"})
     end
   end
+
+  def update(conn, params) do
+    with {:ok, %User{} = user} <- Rocketlivery.update_user(params) do
+      conn
+      |> put_status(:ok)
+      |> render("show.json", user: user)
+    end
+  end
 end
