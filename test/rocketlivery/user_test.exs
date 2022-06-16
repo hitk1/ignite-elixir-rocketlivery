@@ -41,5 +41,23 @@ defmodule Rocketlivery.UserTest do
 
       assert %Changeset{changes: %{name: "Testing update params"}, valid?: true} = response
     end
+
+    test "when there are some error, returns an invalid changeset" do
+      params = %{
+        age: 15,
+        address: "Rua teste do tste, 34",
+        cep: "12345688",
+        cpf: "12345678900",
+        email: "test@mail.com",
+        password: "123",
+        name: "Testing app"
+      }
+
+      response = User.changeset(params)
+
+      expected_response = %{age: ["must be greater than or equal to 18"]}
+
+      assert errors_on(response) == expected_response
+    end
   end
 end
