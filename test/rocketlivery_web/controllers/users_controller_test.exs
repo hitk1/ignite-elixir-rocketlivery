@@ -54,4 +54,18 @@ defmodule RocketliveryWeb.UsersControllerTest do
              }
     end
   end
+
+  describe "delete/2" do
+    test "when there is a user with the giver id, deletes the user", %{conn: conn} do
+      hard_coded_id = "34998af8-9c2d-4961-a0d7-51666758cf2e"
+      insert(:user)
+
+      response =
+        conn
+        |> delete(Routes.users_path(conn, :delete, hard_coded_id))
+        |> response(:ok)
+
+      assert "{\"message\":\"User deleted successfully!\"}" == response
+    end
+  end
 end
