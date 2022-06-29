@@ -3,6 +3,8 @@ defmodule Rocketlivery.User do
 
   import Ecto.Changeset
 
+  alias Rocketlivery.Order
+
   # Esta chave deve ser obrigatória quando o padrão da chave primaria é substituído
   # no caso, foi alterado para UUIDv4 [binary_id]
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -21,6 +23,8 @@ defmodule Rocketlivery.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :name, :string
+
+    has_many :orders, Order
 
     timestamps()
   end
