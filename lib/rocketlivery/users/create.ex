@@ -2,7 +2,9 @@ defmodule Rocketlivery.Users.Create do
   alias Rocketlivery.{User, Repo, Error}
   alias Rocketlivery.ViaCep.Client, as: ViaCepClient
 
-  def call(%{"cep" => cep} = params) do
+  def call(params) do
+    cep = Map.get(params, "cep")
+
     with {:ok, %User{} = user} <- User.build(params),
          {:ok, _cep_data} <- ViaCepClient.get_cep_info(cep) do
       Repo.insert(user)

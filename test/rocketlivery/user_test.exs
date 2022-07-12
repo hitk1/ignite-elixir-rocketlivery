@@ -14,10 +14,10 @@ defmodule Rocketlivery.UserTest do
       assert %Changeset{changes: %{name: "Testing app"}, valid?: true} = response
     end
 
-    test "when updating a changeset, return a valid changeset with the giver changes" do
+    test "when updating a changeset, return a valid changeset with the given changes" do
       params = build(:user_params)
 
-      new_params = %{name: "Testing update params"}
+      new_params = %{"name" => "Testing update params"}
 
       response =
         params
@@ -28,7 +28,7 @@ defmodule Rocketlivery.UserTest do
     end
 
     test "when there are some error, returns an invalid changeset" do
-      params = build(:user_params, %{age: 15, password: "123"})
+      params = build(:user_params, %{"age" => 15, "password" => "123"})
 
       response = User.changeset(params)
 
