@@ -3,10 +3,12 @@ defmodule Rocketlivery.ViaCep.Client do
 
   alias Tesla.Env, as: TeslaEnv
   alias Rocketlivery.Error
+  alias Rocketlivery.ViaCep.Behaviour
+
+  @behaviour Behaviour
 
   # Configurando a base URL que este modulo vai usar
   # plug Tesla.Middleware.BaseUrl, "https://viacep.com.br/ws"
-
   @base_url "https://viacep.com.br/ws"
 
   # Middleware de manipualação dos payload, tanto envio quando resposta serão encodados pra JSON
