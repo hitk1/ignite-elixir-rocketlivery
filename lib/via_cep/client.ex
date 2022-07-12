@@ -5,13 +5,16 @@ defmodule Rocketlivery.ViaCep.Client do
   alias Rocketlivery.Error
 
   # Configurando a base URL que este modulo vai usar
-  plug Tesla.Middleware.BaseUrl, "https://viacep.com.br/ws"
+  # plug Tesla.Middleware.BaseUrl, "https://viacep.com.br/ws"
+
+  @base_url "https://viacep.com.br/ws"
 
   # Middleware de manipualação dos payload, tanto envio quando resposta serão encodados pra JSON
   plug Tesla.Middleware.JSON
 
-  def get_cep_info(cep) do
-    get("#{cep}/json")
+  # É necessário informar os parametros dessa forma para que os testes funcionem corretamente
+  def get_cep_info(url \\ @base_url, cep) do
+    get("#{url}#{cep}/json")
     |> handle_response()
   end
 
