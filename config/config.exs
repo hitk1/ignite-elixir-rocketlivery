@@ -14,6 +14,8 @@ config :rocketlivery, Rocketlivery.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
+config :rocketlivery, Rocketlivery.Users.Create, via_cep_adapter: Rocketlivery.ViaCep.Client
+
 # Configures the endpoint
 config :rocketlivery, RocketliveryWeb.Endpoint,
   url: [host: "localhost"],

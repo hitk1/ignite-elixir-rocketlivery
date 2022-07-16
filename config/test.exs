@@ -12,6 +12,8 @@ config :rocketlivery, Rocketlivery.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+config :rocketlivery, Rocketlivery.Users.Create, via_cep_adapter: Rocketlivery.ViaCep.ClientMock
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :rocketlivery, RocketliveryWeb.Endpoint,
