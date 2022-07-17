@@ -20,6 +20,10 @@ config :rocketlivery, RocketliveryWeb.Auth.Guardian,
   issuer: "rocketlivery",
   secret_key: "OLTkjE+Q0SslgYAmUpDz42fX4ueHAphQiph+yM+jwCBR3iV6gv0+nwBwX2GIaLkB"
 
+config :rocketlivery, RocketliveryWeb.Auth.Pipeline,
+  module: RocketliveryWeb.Auth.Guardian,
+  error_handler: RocketliveryWeb.Auth.ErrorHandler
+
 # Configures the endpoint
 config :rocketlivery, RocketliveryWeb.Endpoint,
   url: [host: "localhost"],

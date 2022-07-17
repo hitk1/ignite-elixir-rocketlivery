@@ -8,20 +8,30 @@ defmodule RocketliveryWeb.Router do
     plug UUIDChecker
   end
 
-  scope "/api", RocketliveryWeb do
-    pipe_through :api
+  pipeline :auth do
+    plug RocketliveryWeb.Auth.Pipeline
+  end
 
-    get "/", WelcomeController, :index
+  scope "/api", RocketliveryWeb do
+    pipe_through [:api, :auth]
 
     # Quando há a necessidade de implemetar um crud de um dominio de entidade, no caso usuario
     # basta utilizar o metodo [resources] que ele cria todos os endpoints com os respectivos metodos
     # automaticamente
 
     # neste caso [new, edit] são endpoint adicionais, fora os comuns
-    resources "/users", UsersController, except: [:new, :edit]
-    post "/users/signin", UsersController, :signin
+    resources "/users", UsersController, except: [:new, :edit, :create]
 
     post "/items", ItemsController, :create
+  end
+
+  scope "/api", RocketliveryWeb do
+    pipe_through :api
+
+    get "/", WelcomeController, :index
+    # A criação de usuarios não pode estar no pipeline de autenticação
+    post "/users", UsersController, :create
+    post "/users/signin", UsersController, :signin
   end
 
   # Enables LiveDashboard only for development
