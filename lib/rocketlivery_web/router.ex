@@ -19,6 +19,7 @@ defmodule RocketliveryWeb.Router do
 
     # neste caso [new, edit] são endpoint adicionais, fora os comuns
     resources "/users", UsersController, except: [:new, :edit]
+    post "/users/signin", UsersController, :signin
 
     post "/items", ItemsController, :create
   end

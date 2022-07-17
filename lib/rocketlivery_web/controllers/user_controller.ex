@@ -24,6 +24,14 @@ defmodule RocketliveryWeb.UsersController do
     end
   end
 
+  def signin(conn, params) do
+    with {:ok, token} <- Guardian.authenticate(params) do
+      conn
+      |> put_status(:ok)
+      |> render("signin.json", token: token)
+    end
+  end
+
   def delete(conn, %{"id" => id}) do
     with {:ok, %User{}} <- Rocketlivery.delete_user(id) do
       conn

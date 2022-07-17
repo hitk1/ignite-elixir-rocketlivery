@@ -5,6 +5,8 @@ defmodule RocketliveryWeb.FallbackController do
   alias RocketliveryWeb.ErrorView
 
   def call(conn, {:error, %Error{status: status, reason: reason}}) do
+    IO.inspect(reason)
+
     conn
     |> put_status(status)
     |> put_view(ErrorView)
