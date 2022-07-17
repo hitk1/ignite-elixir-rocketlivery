@@ -16,7 +16,7 @@ defmodule Rocketlivery.ViaCep.Client do
 
   # É necessário informar os parametros dessa forma para que os testes funcionem corretamente
   def get_cep_info(url \\ @base_url, cep) do
-    get("#{url}#{cep}/json")
+    get("#{url}/#{cep}/json")
     |> handle_response()
   end
 

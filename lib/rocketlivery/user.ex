@@ -30,9 +30,12 @@ defmodule Rocketlivery.User do
   end
 
   def build(params) do
-    params
-    |> changeset()
-    |> apply_action!(:create)
+    result_built =
+      params
+      |> changeset()
+      |> apply_action!(:create)
+
+    {:ok, result_built}
   end
 
   def changeset(params) do
