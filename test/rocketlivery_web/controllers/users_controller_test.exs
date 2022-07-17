@@ -3,6 +3,8 @@ defmodule RocketliveryWeb.UsersControllerTest do
 
   import Rocketlivery.Factory
 
+  alias RocketliveryWeb.Auth.Guardian
+
   describe "create/2" do
     # Para testar um controller, cada test recebe a conexão também para realizar os testes adequadamente
     test "when all params are valid, creates the user", %{conn: conn} do
@@ -56,6 +58,16 @@ defmodule RocketliveryWeb.UsersControllerTest do
   end
 
   describe "delete/2" do
+    # Também é possivel acessar a conexão através do setup
+    setup %{conn: conn} do
+      user = insert(:user)
+      {:ok, token, _claims} = Guardian.encode_and_sign(user)
+
+      conn = put_req_header(conn, "authorization", "Bearer #{token}")
+
+      {:ok, conn: conn, user: user}
+    end
+
     test "when there is a user with the giver id, deletes the user", %{conn: conn} do
       hard_coded_id = "34998af8-9c2d-4961-a0d7-51666758cf2e"
       insert(:user)
