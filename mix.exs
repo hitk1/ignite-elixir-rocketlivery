@@ -58,7 +58,8 @@ defmodule Rocketlivery.MixProject do
       {:hackney, "~> 1.17"},
       {:bypass, "~> 2.1", only: :test},
       {:mox, "~> 1.0", only: :test},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:decimal, "~> 2.0"}
     ]
   end
 
