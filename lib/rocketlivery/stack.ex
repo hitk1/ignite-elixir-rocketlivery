@@ -1,6 +1,15 @@
 defmodule Rocketlivery.Stack do
   use GenServer
 
+  # Client Side
+  def start_link(initial_state) when is_list(initial_state) do
+    GenServer.start_link(__MODULE__, initial_state)
+  end
+
+  def push(pid, value), do: GenServer.cast(pid, {:push, value})
+
+  def pop(pid), do: GenServer.call(pid, :pop)
+
   @impl true
   def init(stack) do
     {:ok, stack}
