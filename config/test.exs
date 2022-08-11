@@ -12,6 +12,13 @@ config :rocketlivery, Rocketlivery.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+# Github actions
+if System.get_env("GITHUB_ACTIONS") do
+  config :rocketlivery, Rocketlivery.Repo,
+    username: "postgres",
+    password: "postgres"
+end
+
 config :rocketlivery, Rocketlivery.Users.Create, via_cep_adapter: Rocketlivery.ViaCep.ClientMock
 
 # We don't run a server during test. If one is required,

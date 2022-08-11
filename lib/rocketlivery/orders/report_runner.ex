@@ -26,6 +26,6 @@ defmodule Rocketlivery.Orders.ReportRunner do
 
   # Uma forma de agendar "jobs"
   def schedule_trigger do
-    Process.send_after(self(), "New message", 1000)
+    Process.send_after(self(), "New message", 1000 * 60 * 60)
   end
 end
